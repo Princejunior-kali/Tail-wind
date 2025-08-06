@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - U-PAY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #theme-toggle {
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            padding: 4px;
+            border-radius: 50%;
+        }
+        #theme-toggle:hover {
+            transform: scale(1.2);
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+        #theme-toggle svg {
+            stroke: currentColor;
+        }
+        .dark #theme-toggle {
+            color: #ffffff;
+        }
+        #theme-toggle {
+            color: #1f2937;
+        }
+        .dark .sun-icon {
+            display: none;
+        }
+        .moon-icon {
+            display: none;
+        }
+        .dark .moon-icon {
+            display: inline;
+        }
+    </style>
+</head>
+<body class="bg-gray-200 dark:bg-gray-800 min-h-screen flex items-center justify-center">
+    <div class="bg-white dark:bg-gray-900 p-8 rounded-lg shadow-lg w-full max-w-md">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200 text-center">Sign Up</h2>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-6">Current Date: Wednesday, August 06, 2025 | Time: 12:55 PM WAT</p>
+        <form id="signupForm" class="space-y-4">
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Name</label>
+                <input type="text" id="name" name="name" required class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200" placeholder="John Doe">
+            </div>
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                <input type="email" id="email" name="email" required class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200" placeholder="you@example.com">
+            </div>
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Password</label>
+                <input type="password" id="password" name="password" required class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200" placeholder="••••••••">
+            </div>
+            <div>
+                <label for="confirmPassword" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" required class="mt-1 block w-full p-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200" placeholder="••••••••">
+            </div>
+            <button type="submit" class="w-full bg-blue-600 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">Sign Up</button>
+            <p class="text-center text-sm text-gray-600 dark:text-gray-400">Already have an account? <a href="login.html" class="text-blue-600 dark:text-blue-400 hover:underline">Login</a></p>
+        </form>
+        <div class="mt-4 flex justify-center">
+            <button id="theme-toggle" class="focus:outline-none cursor-pointer flex items-center justify-center" aria-label="Toggle between light and dark theme">
+                <svg class="sun-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z" />
+                </svg>
+                <svg class="moon-icon w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9 9 0 0020.354 15.354z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const signupForm = document.getElementById('signupForm');
+
+        // Theme toggle
+        themeToggle.addEventListener('click', () => {
+            const isDark = !document.documentElement.classList.contains('dark');
+            document.documentElement.classList.toggle('dark', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Load theme on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const isDark = savedTheme === 'dark' || (!savedTheme && prefersDark);
+            document.documentElement.classList.toggle('dark', isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        // Basic form validation
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (!name || !email || !password || !confirmPassword) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            if (!/^\S+@\S+\.\S+$/.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            if (password !== confirmPassword) {
+                alert('Passwords do not match.');
+                return;
+            }
+            alert('Signup successful!'); // Replace with actual signup logic
+        });
+    </script>
+</body>
+</html>
