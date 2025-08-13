@@ -10,26 +10,6 @@ on:
   schedule:
     #  make it run every 2 days at 1:30 UTC
     - cron: '30 1 */2 * *'
-  workflow_run:
-    workflows: ["GitHub Actions Demo"]
-    types:
-      - completed
-  # This allows you to trigger the workflow when a workflow run is completed
-  # This is useful for chaining workflows together
-  repository_dispatch:
-    types: [run-github-actions-demo]
-  # This allows you to trigger the workflow from an external event
-  # For example, you can use this to trigger the workflow from a webhook
-  issue_comment:
-    types: [created]
-  # This allows you to trigger the workflow when a comment is created on an issue
-  issues:
-    types: [opened, edited]
-  # This allows you to trigger the workflow when an issue is opened or edited
-  pull_request_review:
-    types: [submitted, edited]
-  # This allows you to trigger the workflow when a pull request review is submitted or edited
-  # This allows you to manually trigger the workflow from the GitHub UI
 
   workflow_dispatch:
 jobs:
