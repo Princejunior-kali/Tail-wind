@@ -2,8 +2,9 @@ name: Deploy Static Website with Hello Message to GitHub Pages
 
 on:
   push:
-    branches: ["master"]  # Change to your default branch if different
-  workflow_dispatch:
+    branches: ["master"]  # Change to your default branch if differents
+  # schedule: 
+  #    time : "0 0 */2 * * *"
 
 permissions:
   contents: read
@@ -13,7 +14,6 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: false
-
 jobs:
   deploy:
     environment:
@@ -23,28 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Generate index.html with Hello Message
-        run: |
-          cat << EOF > index.html
-          <!DOCTYPE html>
-          <html lang="en">
-          <head>
-              <meta charset="UTF-8">
-              <meta name="viewport" content="width=device-width, initial-scale=1.0">
-              <title>My Project</title>
-              <style>
-                  body { font-family: Arial, sans-serif; text-align: center; padding: 50px; }
-                  h1 { color: #4CAF50; }
-              </style>
-          </head>
-          <body>
-              <h1>Hello! Welcome to my project.</h1>
-              <p>Thanks for visiting.</p>
-          </body>
-          </html>
-          EOF
-
+        
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
