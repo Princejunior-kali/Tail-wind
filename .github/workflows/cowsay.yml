@@ -1,0 +1,32 @@
+name: cowsay library generate ascii library
+
+on:
+  push:
+    branches: ["master"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs: 
+  first-cowsay:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout all repos
+        uses: actions/checkout@v5
+
+      - name: Test job
+        run: echo "my first job"
+
+      - name: Install cowsay
+        run: sudo apt-get install cowsay -y
+
+      - name: Test file exist
+        run: cowsay -f dragon "Run for cover, I am a Dragon... hahahahah" >> dragon.txt
+      
+      - name: read file
+        run: cat dragon.txt
+
+      - name: check out repo file
+        run: ls -lrta
