@@ -30,6 +30,9 @@ jobs:
       - name: Test job
         run: echo "my first job"
 
+      - name: Install npm
+        run: sudo apt-get install -y npm
+
       - name: Run job
         run: cat New_repo/README.md
 
