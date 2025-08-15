@@ -38,3 +38,6 @@ jobs:
 
       - name: The last job
         run: echo "deployment success"
+
+      - name: The last job to test npm
+        run: npm -v
