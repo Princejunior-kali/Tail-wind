@@ -20,7 +20,7 @@ jobs:
         run: echo "my first job"
 
       - name: Run job
-        run: cat Princejunior-kali/Tail-wind/README.md
+        run: cat README.md
 
       - name: The last job
         run: echo "deployment success"
