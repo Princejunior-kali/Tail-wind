@@ -3,6 +3,7 @@ name: Deployment_flow
 on:
   push:
     branches: ["master"]
+
 permissions:
   contents: read
   pages: write
@@ -12,6 +13,9 @@ jobs:
   first:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
       - name: Test job
         run: echo "my first job"
 
@@ -20,4 +24,3 @@ jobs:
 
       - name: The last job
         run: echo "deployment success"
-
