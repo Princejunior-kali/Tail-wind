@@ -16,11 +16,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Checkout all repos
+        uses: actions/checkout@v5
+        with:
+          path: master
+
+      - name: Checkout tools repo
+        uses: actions/checkout@v5
+        with:
+          repository: Princejunior-kali/GithubIntro
+          path: New_repo
+
       - name: Test job
         run: echo "my first job"
 
       - name: Run job
-        run: cat README.md
+        run: cat New_repo/README.md
 
       - name: The last job
         run: echo "deployment success"
